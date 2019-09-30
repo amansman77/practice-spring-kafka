@@ -34,4 +34,4 @@ Synchronous process
     
 ## 샘플
 - Publish-Subscribe Pattern
-    - com.ho.practice.kafka.pubsub에 구현
+    - `com.ho.practice.kafka.pubsub`에 구현

@@ -1,2 +1,14 @@
 kafka:
   bootstrapAddress: http://192.168.0.47:9092
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: http://192.168.0.47:9092
+      bindings:
+        input:
+          destination: test
+          content-type: application/json
+          group: foo2
