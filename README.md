@@ -35,3 +35,5 @@ Synchronous process
 ## 샘플
 - Publish-Subscribe Pattern
     - `com.ho.practice.kafka.pubsub`에 구현
+- Request-Reply Pattern
+    - `com.ho.practice.kafka.reqrep`에 구현
