@@ -24,7 +24,7 @@ public class Producer {
 	 * 주기적으로 메세지 전송
 	 */
 	@Scheduled(fixedDelayString = "${schedule.delay}")
-	public void cronJobSch() {
+	public void sendMessage() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date now = new Date();
 		String strDate = sdf.format(now);

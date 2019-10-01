@@ -16,7 +16,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import com.ho.practice.kafka.message.Greeting;
 
 /**
- * One way messaging에 대한 설정
+ * Producer 설정
  * @author hhsung
  *
  */

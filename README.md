@@ -19,10 +19,12 @@ Spring을 기반으로 kafka를 연계한다.
     - Kafka의 Stream을 활용하도록 지원
     - Spring-kafka를 포함하고 있음
 
-## Publish-Subscribe vs Streams
+## Producer-Consumer vs Streams
 - Producer-Consumer
     - Consumer는 Polling방식으로 메시지 조회
 - Streams
+    - [Kafka Streams is a client library for processing and analyzing data stored in Kafka](https://kafka.apache.org/23/documentation/streams/core-concepts)
+    - 내부적으로 Producer-Consumer pattern 활용
     - Data pipeline으로 활용 가능
     - Apache Storm이나 Apache Samza를 대용할 수 있음
     
