@@ -8,7 +8,7 @@ import com.ho.practice.kafka.message.Greeting;
 @Component
 public class Consumer {
 	
-	@KafkaListener(topics = KafkaProducerConfig.KAFKA_TOPICS, groupId = "foo")
+	@KafkaListener(topics = "${kafka.topic.pubsub}", containerFactory = "kafkaListenerContainerFactory")
     public void listen(Greeting message) {
     	System.out.println("Pubsub receive : " + message);
     }

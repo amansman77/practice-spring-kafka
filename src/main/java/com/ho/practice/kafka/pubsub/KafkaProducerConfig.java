@@ -23,8 +23,6 @@ import com.ho.practice.kafka.message.Greeting;
 @Configuration
 public class KafkaProducerConfig {
  
-	public final static String KAFKA_TOPICS = "test";
-	
 	@Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 	

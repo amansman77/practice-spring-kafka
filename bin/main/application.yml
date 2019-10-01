@@ -1,5 +1,14 @@
+schedule:
+  delay: 3000
+
+# 템플릿에서 활용하는 프로퍼티
 kafka:
   bootstrapAddress: http://192.168.0.47:9092
+  topic:
+    pubsub: test-pubsub
+    reqrep:
+      request: test-reqrep-request
+      reply: test-reqrep-reply
 
 spring:
   cloud:
@@ -9,6 +18,6 @@ spring:
           brokers: http://192.168.0.47:9092
       bindings:
         input:
-          destination: test
+          destination: test-pubsub
           content-type: application/json
           group: foo2
