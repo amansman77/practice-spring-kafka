@@ -3,7 +3,7 @@ schedule:
 
 # 템플릿에서 활용하는 프로퍼티
 kafka:
-  bootstrapAddress: http://192.168.0.47:9092
+  bootstrapAddress: http://192.168.0.42:9092
   topic:
     pubsub: test-pubsub
     reqrep:
@@ -15,7 +15,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: http://192.168.0.47:9092
+          brokers: http://192.168.0.42:9092
       bindings:
         input:
           destination: test-pubsub
