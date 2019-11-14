@@ -13,7 +13,7 @@ public class Consumer {
     	System.out.println("[String] Pubsub receive : " + message);
     }
 	
-	@KafkaListener(topics = "${kafka.topic.reqrep.request}", containerFactory = "jsonKafkaListenerContainerFactory")
+	@KafkaListener(topics = "${kafka.topic.pubsub}", containerFactory = "jsonKafkaListenerContainerFactory")
 	public void listen2(Greeting message) {
     	System.out.println("[Json] Pubsub receive : " + message);
     }

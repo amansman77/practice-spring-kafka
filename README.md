@@ -39,3 +39,35 @@ Synchronous process
     - `com.ho.practice.kafka.pubsub`에 구현
 - Request-Reply Pattern
     - `com.ho.practice.kafka.reqrep`에 구현
+    
+
+## 이슈
+
+### Kafka의 메세지를 Object로 맵핑하여 받는경우 `Non-standard token 'NaN'` 발생
+
+메세지의 Value에 null이 있는 경우 다음과 같은 오류 발생하면서
+**kafka의 메세지를 소비하지 않고 동일한 메세지에 대해서 지속적으로 오류상황 유지**
+```bash
+org.apache.kafka.common.errors.SerializationException: Error deserializing key/value for partition model-result-0 at offset 36. If needed, please seek past the record to continue consumption.
+Caused by: org.apache.kafka.common.errors.SerializationException: Can't deserialize data [[123, 34, 115, 101, 110, 115, 111, 114, 73, 100, 34, 58, 32, 34, 118, 105, 98, 101, 95, 110, 111, 105, 115, 101, 34, 44, 32, 34, 109, 111, 100, 101, 108, 73, 100, 34, 58, 32, 34, 97, 118, 101, 114, 97, 103, 101, 95, 109, 111, 100, 101, 108, 34, 44, 32, 34, 115, 101, 110, 115, 105, 110, 103, 68, 97, 116, 101, 34, 58, 32, 34, 50, 48, 49, 57, 45, 49, 49, 45, 49, 50, 32, 49, 51, 58, 51, 55, 58, 50, 56, 34, 44, 32, 34, 118, 97, 108, 117, 101, 34, 58, 32, 78, 97, 78, 125]] from topic [model-result]
+Caused by: com.fasterxml.jackson.core.JsonParseException: Non-standard token 'NaN': enable JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS to allow
+ at [Source: (byte[])"{"a": "1", "b": "2", "c": "2019-11-12 13:37:28", "value": NaN}"; line: 1, column: 106]
+	at com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:1804) ~[jackson-core-2.9.9.jar:2.9.9]
+	at com.fasterxml.jackson.core.base.ParserMinimalBase._reportError(ParserMinimalBase.java:693) ~[jackson-core-2.9.9.jar:2.9.9]
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._handleUnexpectedValue(UTF8StreamJsonParser.java:2608) ~[jackson-core-2.9.9.jar:2.9.9]
+```
+
+**해결**
+
+Kafka 컨슈머에 class type만 지정하던 방식에서
+```bash
+new JsonDeserializer<>(ModelResultDto.class)
+```
+
+`ObjectMapper`를 커스터마이스하여 `ALLOW_NON_NUMERIC_NUMBERS` 옵션을 `true` 로 설정함
+```bash
+ObjectMapper objectMapper = new ObjectMapper();
+objectMapper.configure(Feature.ALLOW_NON_NUMERIC_NUMBERS, true);
+
+new JsonDeserializer<>(ModelResultDto.class, objectMapper)
+```
