@@ -45,6 +45,8 @@ Synchronous process
 
 ### Kafka의 메세지를 Object로 맵핑하여 받는경우 `Non-standard token 'NaN'` 발생
 
+`ObjectMapperTest 클래스`에 테스트코드 작성
+
 메세지의 Value에 null이 있는 경우 다음과 같은 오류 발생하면서
 **kafka의 메세지를 소비하지 않고 동일한 메세지에 대해서 지속적으로 오류상황 유지**
 ```bash
